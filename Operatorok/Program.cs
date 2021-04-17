@@ -9,13 +9,14 @@ namespace Operatorok
 {
     class Program
     {
-        private static readonly string FILE_PATH = "src\\kifejezesek.txt";
-        private static readonly string[] VALID_OPERATORS = { "+", "-", "*", "/", "div", "mod" };
+        private static readonly string FILE_IN = "src\\kifejezesek.txt";
+        private static readonly string FILE_OUT = "src\\eredmenyek.txt";
+
         static List<ArithmeticExpression> arithmeticExpressions;
         static void Main(string[] args)
         {
             #region 1. feladat
-            arithmeticExpressions = ReadSourceFile(FILE_PATH);
+            arithmeticExpressions = ReadFile(FILE_IN);
             #endregion
 
             #region 2. feladat
@@ -46,12 +47,12 @@ namespace Operatorok
             #region 5. feladat
             var groupByOperaator = arithmeticExpressions
                 .Select(x => x)
-                .Where(x => VALID_OPERATORS.Contains(x.Operaator))
+                .Where(x => x.OperaatorIsValid())
                 .GroupBy(x => x.Operaator)
                 .ToList();
 
             Console.WriteLine("5. feladat: Statisztika");
-            foreach(string operaator in groupByOperaator.Select(x => x.Key))
+            foreach (string operaator in groupByOperaator.Select(x => x.Key))
             {
                 var counter = arithmeticExpressions
                     .Select(y => y)
@@ -60,31 +61,53 @@ namespace Operatorok
 
                 Console.WriteLine($"\t{operaator} -> {counter} db");
             }
+            #endregion
 
+            #region 7. feladat
+            string userInput = "";
+            while (true)
+            {
+                Console.Write("7. feladat: Kérek egy kifejezést (pl.: 1 + 1): ");
+                userInput = Console.ReadLine();
+
+                if (userInput.Equals("vége"))
+                    break;
+
+                if (ArithmeticExpression.StringToArithmeticExpression(userInput) == null)
+                    break;
+
+                string expressionResult = ArithmeticExpression.StringToArithmeticExpression(userInput).Result();
+
+                Console.WriteLine($"\t{userInput} = {expressionResult}");
+            }
+            #endregion
+
+            #region 8. feladat
+            Console.WriteLine($"8. feladat: {FILE_OUT}");
+            WriteFile(FILE_OUT);
             #endregion
 
             Console.ReadKey();
-
         }
 
-        private static List<ArithmeticExpression> ReadSourceFile(string filePath)
+        private static List<ArithmeticExpression> ReadFile(string filePath)
         {
             List<ArithmeticExpression> result = new List<ArithmeticExpression>();
 
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
-                string[] arithmethicExpressionString = line.Split(' ');
-
-                Int32.TryParse(arithmethicExpressionString[0], out int firstOperand);
-                string operaator = arithmethicExpressionString[1];
-                Int32.TryParse(arithmethicExpressionString[0], out int secondOperand);
-
-                result.Add(new ArithmeticExpression(firstOperand, operaator, secondOperand));
-
+                result.Add(ArithmeticExpression.StringToArithmeticExpression(line));
             }
 
             return result;
+        }
+
+        private static void WriteFile(string fileName)
+        {
+            StringBuilder contents = new StringBuilder();
+            arithmeticExpressions.ForEach(x => contents.Append(x.ToString()).Append("\n"));
+            File.WriteAllText(fileName, contents.ToString());
         }
     }
 }
