@@ -19,6 +19,7 @@ namespace Operatorok
 
             #region 2. feladat
             var totalNumberOfExpressions = arithmeticExpressions.Count();
+
             Console.WriteLine($"2. feladat: Kifejezések száma: {totalNumberOfExpressions}");
             #endregion
 
@@ -30,6 +31,21 @@ namespace Operatorok
 
             Console.WriteLine($"3. feladat: Kifejezések maradékos osztással: {numberOfExpressionsWithMod}");
             #endregion
+
+            #region 4. feladat
+            var existsWhereBothDividableByTen = arithmeticExpressions
+                .Select(x => x)
+                .Where(x => (x.FirstOperand % 10 == 0) && (x.SecondOperand % 10 == 0))
+                .Any();
+            string existsWhereBothDividableByTenString = existsWhereBothDividableByTen ? "Van" : "Nincs";
+
+            Console.WriteLine($"4. feladat: {existsWhereBothDividableByTenString} ilyen kifejezés!");
+            #endregion
+
+            #region 5. feladat
+
+            #endregion
+
             Console.ReadKey();
 
         }
