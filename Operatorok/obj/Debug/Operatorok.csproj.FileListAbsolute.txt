@@ -1,0 +1,7 @@
+C:\Users\gyori\source\repos\Operatorok\Operatorok\bin\Debug\Operatorok.exe.config
+C:\Users\gyori\source\repos\Operatorok\Operatorok\bin\Debug\Operatorok.exe
+C:\Users\gyori\source\repos\Operatorok\Operatorok\bin\Debug\Operatorok.pdb
+C:\Users\gyori\source\repos\Operatorok\Operatorok\obj\Debug\Operatorok.csprojAssemblyReference.cache
+C:\Users\gyori\source\repos\Operatorok\Operatorok\obj\Debug\Operatorok.csproj.CoreCompileInputs.cache
+C:\Users\gyori\source\repos\Operatorok\Operatorok\obj\Debug\Operatorok.exe
+C:\Users\gyori\source\repos\Operatorok\Operatorok\obj\Debug\Operatorok.pdb
