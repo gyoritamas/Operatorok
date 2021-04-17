@@ -9,8 +9,8 @@ namespace Operatorok
 {
     class Program
     {
-        private static readonly string FILE_IN = "src\\kifejezesek.txt";
-        private static readonly string FILE_OUT = "src\\eredmenyek.txt";
+        private static readonly string FILE_IN = "kifejezesek.txt";
+        private static readonly string FILE_OUT = "eredmenyek.txt";
 
         static List<ArithmeticExpression> arithmeticExpressions;
         static void Main(string[] args)
